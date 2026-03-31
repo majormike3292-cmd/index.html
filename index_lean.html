@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>No matter what… it's you 🤍</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{width:100%;min-height:100%;overflow-x:hidden;}
+
+    /* ── BACKGROUND (bears image) ── */
+    body {
+      font-family:'Lato',sans-serif;
+      font-weight:300;
+      color:white;
+      position:relative;
+    }
+    #bg {
+      position:fixed;inset:0;
+      background:url('bg.png') center center/cover no-repeat;
+      animation:bgPulse 9s ease-in-out infinite;
+      z-index:0;pointer-events:none;
+    }
+    @keyframes bgPulse{
+      0%,100%{transform:scale(1.0);filter:brightness(0.72)}
+      50%    {transform:scale(1.04);filter:brightness(0.8)}
+    }
+    /* deep pink overlay so text reads clearly */
+    #overlay {
+      position:fixed;inset:0;
+      background:linear-gradient(
+        180deg,
+        rgba(100,0,40,0.55) 0%,
+        rgba(180,30,80,0.35) 40%,
+        rgba(80,0,30,0.70) 100%
+      );
+      z-index:1;pointer-events:none;
+    }
+    /* vignette */
+    #vignette{
+      position:fixed;inset:0;
+      background:radial-gradient(ellipse at center,transparent 35%,rgba(0,0,0,0.55) 100%);
+      z-index:2;pointer-events:none;
+    }
+
+    /* ── ALL CONTENT SITS ABOVE BG ── */
+    #page {user-select:text;-webkit-user-select:text;
+      position:relative;z-index:25;
+      padding:30px 20px 140px;
+      max-width:480px;
+      margin:0 auto;
+      text-align:center;
+    }
+
+    /* ── INTRO SCREEN ── */
+    #intro{
+      position:fixed;inset:0;
+      background:#000;
+      display:flex;flex-direction:column;
+      justify-content:center;align-items:center;
+      font-family:'Great Vibes',cursive;
+      font-size:30px;color:white;
+      z-index:50;text-align:center;padding:30px;
+      cursor:pointer;
+      transition:opacity 1.8s ease;
+    }
+    #intro .hint{
+      margin-top:24px;font-family:'Lato',sans-serif;
+      font-size:13px;letter-spacing:3px;
+      text-transform:uppercase;opacity:0.45;
+    }
+
+    /* ── PHOTO CIRCLE ── */
+    .photo-wrap{
+      width:200px;height:200px;border-radius:50%;
+      margin:10px auto 6px;
+      border:4px solid rgba(255,180,200,0.9);
+      box-shadow:0 0 30px rgba(255,100,150,0.6),0 0 60px rgba(255,80,120,0.3);
+      overflow:hidden;display:flex;align-items:center;justify-content:center;
+      background:rgba(255,100,150,0.15);
+      animation:heartbeat 3s ease-in-out infinite;
+    }
+    @keyframes heartbeat{
+      0%,100%{box-shadow:0 0 30px rgba(255,100,150,0.6),0 0 60px rgba(255,80,120,0.3)}
+      50%    {box-shadow:0 0 45px rgba(255,130,170,0.9),0 0 80px rgba(255,100,140,0.5)}
+    }
+    .photo-wrap img{width:100%;height:100%;object-fit:cover}
+    .photo-wrap .heart-icon{font-size:72px}
+
+    /* ── HEADING ── */
+    h1{
+      font-family:'Great Vibes',cursive;
+      font-size:46px;margin:10px 0 0;
+      text-shadow:0 2px 20px rgba(255,100,150,0.8);
+      animation:titleGlow 4s ease-in-out infinite;
+    }
+    @keyframes titleGlow{
+      0%,100%{text-shadow:0 2px 20px rgba(255,100,150,0.8)}
+      50%    {text-shadow:0 2px 35px rgba(255,160,190,1),0 0 60px rgba(255,80,120,0.5)}
+    }
+
+    /* ── LETTER ── */
+    .letter{user-select:text;-webkit-user-select:text;-moz-user-select:text;touch-action:auto;cursor:text;-webkit-touch-callout:default;
+      font-family:'Great Vibes',cursive;
+      font-size:22px;
+      max-width:400px;margin:28px auto 0;
+      min-height:180px;line-height:1.8;
+      white-space:pre-wrap;
+      text-shadow:0 1px 6px rgba(0,0,0,0.4);
+    }
+
+    /* ── BUTTONS ── */
+    .btn-row{margin-top:30px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+    button{
+      padding:13px 26px;border:none;border-radius:30px;
+      background:linear-gradient(135deg,rgba(255,180,200,0.95),rgba(255,120,160,0.9));
+      color:#6b0028;font-weight:700;font-size:14px;
+      cursor:pointer;letter-spacing:0.5px;
+      box-shadow:0 6px 20px rgba(200,0,80,0.35);
+      transition:transform 0.15s,box-shadow 0.15s;
+    }
+    button:active{transform:scale(0.95);box-shadow:0 3px 10px rgba(200,0,80,0.2)}
+
+    /* ── WISH BOX ── */
+    .wish-box{margin-top:26px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+    .wish-box input{
+      padding:12px 18px;border-radius:25px;border:none;
+      width:64%;min-width:190px;outline:none;
+      font-size:14px;font-family:'Lato',sans-serif;
+      background:rgba(255,220,230,0.85);color:#5a0020;
+      box-shadow:0 4px 14px rgba(200,0,80,0.2);
+    }
+    .wish-box input::placeholder{color:#c06080}
+
+    /* ── FLOATING WISH ── */
+    .wish-float{
+      position:fixed;left:50%;transform:translateX(-50%);
+      bottom:80px;font-family:'Great Vibes',cursive;font-size:24px;
+      color:white;text-shadow:0 2px 10px rgba(255,80,120,0.6);
+      pointer-events:none;white-space:nowrap;z-index:15;
+      animation:floatWish 5s ease forwards;
+    }
+    @keyframes floatWish{
+      0%  {opacity:1;transform:translate(-50%,0)}
+      100%{opacity:0;transform:translate(-50%,-260px)}
+    }
+
+    /* ── HUG OVERLAY ── */
+    .fullscreen{
+      position:fixed;inset:0;
+      background:rgba(60,0,20,0.92);
+      display:none;justify-content:center;align-items:center;
+      text-align:center;padding:32px 24px;z-index:40;cursor:pointer;
+    }
+    .fullscreen p{
+      font-size:28px;font-family:'Great Vibes',cursive;
+      line-height:1.7;color:white;
+      text-shadow:0 2px 20px rgba(255,100,150,0.6);max-width:360px;
+    }
+    .fullscreen .tap-close{
+      position:absolute;bottom:28px;
+      font-size:12px;letter-spacing:3px;text-transform:uppercase;
+      opacity:0.4;font-family:'Lato',sans-serif;
+    }
+
+    /* ── FLOATING HEARTS (ambient) ── */
+    .fheart{
+      position:fixed;pointer-events:none;
+      animation:floatHeart linear forwards;opacity:0;z-index:4;pointer-events:none !important;
+    }
+    @keyframes floatHeart{
+      0%  {opacity:0;transform:translateY(0) scale(0.5)}
+      15% {opacity:0.9}
+      80% {opacity:0.5}
+      100%{opacity:0;transform:translateY(-75vh) scale(1.1)}
+    }
+
+    /* ── FALLING PETALS ── */
+    .petal{
+      position:fixed;top:-20px;pointer-events:none;
+      animation:petalFall linear forwards;opacity:0;z-index:4;pointer-events:none !important;
+    }
+    @keyframes petalFall{
+      0%  {opacity:0;transform:translateY(0) rotate(0deg)}
+      10% {opacity:0.9}
+      90% {opacity:0.5}
+      100%{opacity:0;transform:translateY(108vh) rotate(380deg)}
+    }
+
+    /* ── MUSIC NOTE SPARKLES ── */
+    .note{
+      position:fixed;pointer-events:none;color:rgba(255,190,210,0.9);
+      animation:noteDrift linear forwards;opacity:0;z-index:4;pointer-events:none !important;
+    }
+    @keyframes noteDrift{
+      0%  {opacity:0;transform:translate(0,0)}
+      20% {opacity:0.85}
+      100%{opacity:0;transform:translate(var(--tx),var(--ty))}
+    }
+
+    /* ── MUSIC BAR ── */
+    .music-bar{
+      position:fixed;bottom:0;left:0;width:100%;
+      background:rgba(100,0,40,0.55);
+      backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      padding:10px 16px;z-index:20;
+      border-top:1px solid rgba(255,150,180,0.2);
+    }
+    audio{width:100%}
+  </style>
+</head>
+<body>
+
+<div id="bg"></div>
+<div id="overlay"></div>
+<div id="vignette"></div>
+
+<!-- INTRO -->
+<div id="intro" onclick="dismissIntro()">
+  Open this when you're alone… 🌸
+  <span class="hint">tap to open</span>
+</div>
+
+<div id="page">
+  <div class="photo-wrap">
+    <span class="heart-icon">🤍</span>
+  </div>
+
+  <h1>For You 🌹</h1>
+
+  <div class="letter" id="letter"></div>
+
+  <div class="btn-row">
+    <button onclick="showHug()">Press here for a hug 🫂</button>
+  </div>
+
+  <div class="wish-box">
+    <input id="wishInput" placeholder="Make a wish or prayer…"/>
+    <button onclick="releaseWish()">Release 🌸</button>
+  </div>
+</div>
+
+<!-- Hug overlay -->
+<div class="fullscreen" id="hugScreen" onclick="hideHug()">
+  <p>
+    If you ever feel alone…<br>this is me holding you tight 🤍<br><br>
+    No pressure. No expectations.<br>Just love.
+  </p>
+  <span class="tap-close">tap to close</span>
+</div>
+
+<!-- Music -->
+<div class="music-bar">
+  <audio id="bg-music" loop controls>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<script>
+  // ── Letter
+  const text = `I know you say we aren't equally yoked...
+
+But I love you to death.
+
+If I can't have you as my spouse...
+would you still be my friend?
+
+Because you're the only person I talk to... besides God.
+
+And no matter what happens...
+I just want you in my life somehow.`;
+
+  let charIndex = 0, typing = false;
+  function typeWriter() {
+    if (typing) return;
+    typing = true;
+    function step() {
+      if (charIndex < text.length) {
+        document.getElementById('letter').textContent += text.charAt(charIndex++);
+        setTimeout(step, 52);
+      } else { typing = false; }
+    }
+    step();
+  }
+
+  // ── Intro
+  let introDone = false;
+  function dismissIntro() {
+    if (introDone) return;
+    introDone = true;
+    const intro = document.getElementById('intro');
+    intro.style.opacity = '0';
+    intro.style.pointerEvents = 'none';
+    setTimeout(() => { if (intro.parentNode) intro.remove(); }, 1900);
+    startAudio();
+    typeWriter();
+  }
+  setTimeout(() => { if (!introDone) dismissIntro(); }, 3200);
+
+  // ── Audio
+  const audio = document.getElementById('bg-music');
+  audio.volume = 0;
+  let audioStarted = false;
+  function startAudio() {
+    if (audioStarted) return;
+    audioStarted = true;
+    audio.play().then(() => {
+      let v = 0;
+      const f = setInterval(() => {
+        v = Math.min(v + 0.04, 0.8);
+        audio.volume = v;
+        if (v >= 0.8) clearInterval(f);
+      }, 180);
+    }).catch(() => {});
+  }
+  document.body.addEventListener('click', startAudio, { once: true });
+
+  // ── Hug
+  function showHug() { document.getElementById('hugScreen').style.display = 'flex'; }
+  function hideHug() { document.getElementById('hugScreen').style.display = 'none'; }
+
+  // ── Particle engine — ONE loop, staggered, capped
+  const hearts = ['🩷','💗','💖','💕','🤍','💓','❤️'];
+  let hc = 0, pc = 0;
+
+  function spawnHeart() {
+    if (hc >= 8) return;
+    hc++;
+    const h = document.createElement('div');
+    h.classList.add('fheart');
+    h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    h.style.cssText = `left:${8 + Math.random()*60}vw;bottom:${15 + Math.random()*35}vh;font-size:${13 + Math.random()*14}px`;
+    const d = 4 + Math.random() * 3;
+    h.style.animationDuration = d + 's';
+    document.body.appendChild(h);
+    setTimeout(() => { h.remove(); hc--; }, d * 1000);
+  }
+
+  function spawnPetal() {
+    if (pc >= 12) return;
+    pc++;
+    const p = document.createElement('div');
+    p.classList.add('petal');
+    p.textContent = ['🌸','🌺','🌹'][Math.floor(Math.random() * 3)];
+    p.style.cssText = `left:${Math.random()*100}vw;font-size:${10 + Math.random()*12}px`;
+    const d = 5 + Math.random() * 4;
+    p.style.animationDuration = d + 's';
+    document.body.appendChild(p);
+    setTimeout(() => { p.remove(); pc--; }, d * 1000);
+  }
+
+  function spawnNote() {
+    const n = document.createElement('div');
+    n.classList.add('note');
+    n.textContent = Math.random() > 0.5 ? '♪' : '♫';
+    n.style.left = (25 + Math.random() * 50) + 'vw';
+    n.style.bottom = (8 + Math.random() * 14) + 'vh';
+    n.style.setProperty('--tx', (Math.random() * 60 - 30) + 'px');
+    n.style.setProperty('--ty', -(40 + Math.random() * 60) + 'px');
+    const d = 3 + Math.random() * 2;
+    n.style.animationDuration = d + 's';
+    n.style.fontSize = (14 + Math.random() * 10) + 'px';
+    document.body.appendChild(n);
+    setTimeout(() => n.remove(), d * 1000);
+  }
+
+  // Single staggered loop — much lighter than 4 separate setIntervals
+  let tick = 0;
+  const loop = setInterval(() => {
+    tick++;
+    if (tick % 2 === 0) spawnHeart();   // every ~1s
+    if (tick % 1 === 0) spawnPetal();   // every ~500ms
+    if (tick % 2 === 0) spawnNote();    // every ~1s
+  }, 500);
+
+  // Pause particles when tab is hidden (saves battery/CPU)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) clearInterval(loop);
+  });
+
+  // ── Wish
+  function releaseWish() {
+    const val = document.getElementById('wishInput').value.trim();
+    if (!val) return;
+    const w = document.createElement('div');
+    w.classList.add('wish-float');
+    w.textContent = val + ' 🌸';
+    document.body.appendChild(w);
+    setTimeout(() => w.remove(), 5200);
+    document.getElementById('wishInput').value = '';
+  }
+  document.getElementById('wishInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') releaseWish();
+  });
+</script>
+</body>
+</html>
