@@ -13,7 +13,7 @@
     body {
       font-family:'Lato',sans-serif;
       font-weight:300;
-      color:white;
+      color:#1a1a1a;
       position:relative;
     }
     #bg {
@@ -92,7 +92,7 @@
     h1{
       font-family:'Great Vibes',cursive;
       font-size:46px;margin:10px 0 0;
-      text-shadow:0 2px 20px rgba(255,100,150,0.8);
+      color:#1a1a1a;text-shadow:0 1px 3px rgba(255,255,255,0.4);
       animation:titleGlow 4s ease-in-out infinite;
     }
     @keyframes titleGlow{
@@ -293,7 +293,6 @@ I just want you in my life somehow.`;
     intro.style.opacity = '0';
     intro.style.pointerEvents = 'none';
     setTimeout(() => { if (intro.parentNode) intro.remove(); }, 1900);
-    startAudio();
     typeWriter();
   }
   setTimeout(() => { if (!introDone) dismissIntro(); }, 3200);
